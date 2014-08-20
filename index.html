@@ -1,40 +1,59 @@
 <html ng-app="USAirports">
   <head>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.js"></script>
-    <script src="//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.min.js"></script>
-    <script src="//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.tpl.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-animate.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/angular-motion.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/bootstrap-additions.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libraries.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/main.min.css">
+    <script src="//code.angularjs.org/1.2.18/angular.min.js" data-semver="1.2.18"></script>
+    <script src="//code.angularjs.org/1.2.18/angular-animate.min.js" data-semver="1.2.18"></script>
+    <script src="//code.angularjs.org/1.2.18/angular-sanitize.min.js" data-semver="1.2.18"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.0.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.0.5"></script>
+    <link href='stylesheets/styles.css' rel='stylesheet' type='text/css'>
 
   </head>
-  <body ng-controller='TwitterReviewsController' ng-init='init()'>
+  <body ng-controller='NauticalMilesController' ng-init='init()'>
+    <div class="container">
+      <h1 class='title'>Nautical Miles Between Airports</h1>
+      <h5 class='subtitle'>Select any two airports in the US to find the nautical miles between them and displayed on a map</h5>
 
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <label><i class="fa fa-globe"></i> State</label>
-        <input type="text" class="form-control" ng-model="selectedAirport" ng-options="ai as ai.airport for ai in air_obj" placeholder="Enter state" bs-typeahead>
-        <h1>{{selectedAirport.airport}}, {{selectedAirport.faa[0]}}</h1>
-        <h3>{{selectedAirport.city}}, {{selectedAirport.state}}</h3>
-        <h4>Lat: {{selectedAirport.lat}}, Lng: {{selectedAirport.lng}}</h4>
-        <input type="text" class="form-control" ng-model="selectedAirport2" ng-options="ai as ai.airport for ai in air_obj" placeholder="Enter state" bs-typeahead>
-        <h1>{{selectedAirport2.airport}}, {{selectedAirport2.faa[0]}}</h1>
-        <h3>{{selectedAirport2.city}}, {{selectedAirport2.state}}</h3>
-        <h4>Lat: {{selectedAirport2.lat}}, Lng: {{selectedAirport2.lng}}</h4>
+      <div class='input_wrapper'>
+        <div class='airport_input'>
+          <label for='airport1'>Departing Airport:</label>
+          <input id='airport1' type="text" ng-model="selectedAirport" ng-options="ai as ai.airport for ai in air_obj" placeholder="Select the first airport" bs-typeahead>
+        </div>
+
+        <div class='airport_input'>
+          <label for='airport2'>Destination Airport:</label>
+          <input id='airport2' type="text" ng-model="selectedAirport2" ng-options="ai as ai.airport for ai in air_obj" placeholder="Select the second airport" bs-typeahead>
+        </div>
+
+        <button type="button" class="btn btn-success calculate" ng-click="calc_miles()">calculate nautical miles</button>
       </div>
-    </form>
-    <button ng-click="calc_miles()">calculate miles</button>
 
-  <div id="map" style="width:50%; height:400px;"></div>
+      <div class='results_container' style='display:none'>
+        <h4>Distance between <b>{{selectedAirport.airport + ' (' + selectedAirport.faa[0] +')'}}</b> and <b>{{selectedAirport2.airport + ' (' + selectedAirport2.faa[0] +')'}}</b> is:</h4>
+        <h2>{{nautical_miles}} nautical miles</h2>
 
 
 
+        <div id="map" style="width:100%; height:500px;"></div>
+      </div>
+    </div>
+    <div id='footer'>
+      <p>Made by Taylor Kolasinski</p>
+    </div>
   </body>
   <script src="controllers/controllers.js"></script>
-  <script>
-
-  </script>
+  <script src="//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.min.js"></script>
+  <script src="//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.tpl.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-animate.min.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 </html>

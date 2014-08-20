@@ -1,7 +1,7 @@
 var usAirports = angular.module('USAirports', ['mgcrea.ngStrap', 'ngRoute']);
 
 // Controller that manages gettiner the review from twitter
-function TwitterReviewsController($scope, $http) {
+function NauticalMilesController($scope, $http) {
 
   $scope.selectedAirport = '';
   $scope.selectedAirport2 = '';
@@ -37,6 +37,7 @@ function TwitterReviewsController($scope, $http) {
             Math.sin(r_lng_dif/2) * Math.sin(r_lng_dif/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = (R * c)/1.852;
+    $scope.nautical_miles = d;
 
     // Get midpoint coordinates
     // Need to improve
@@ -77,12 +78,13 @@ function TwitterReviewsController($scope, $http) {
     flightPath = new google.maps.Polyline({
       path: directFlight,
       geodesic: true,
-      strokeColor: '#FF0000',
+      strokeColor: '#3498db',
       strokeOpacity: 1.0,
       strokeWeight: 2
     });
 
     flightPath.setMap(map);
+    $('.results_container').show();
   }
 }
 
