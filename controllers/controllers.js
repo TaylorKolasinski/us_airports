@@ -89,7 +89,6 @@ function NauticalMilesController($scope, $http) {
 }
 
 
-
 // Add degree to radian conversion to number prototype
 if (typeof(Number.prototype.toRad) === "undefined") {
   Number.prototype.toRad = function() {
