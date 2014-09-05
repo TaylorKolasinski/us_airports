@@ -66,3 +66,14 @@ input {
   text-align: center;
   opacity: 0.6;
 }
+
+#footer ul {
+  list-style: none;
+  width: 395px;
+  margin: auto;
+}
+
+#footer ul li {
+  float: left;
+  margin-right: 50px;
+}
